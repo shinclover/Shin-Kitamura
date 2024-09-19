@@ -1,4 +1,7 @@
 <!-- body内だけを表示しています。 -->
+<x-app-layout>
+    <x-slot name="header">
+        </x-slot>
 <body>
     <h1 class="title">編集画面</h1>
     <div class="content">
@@ -17,3 +20,4 @@
         </form>
     </div>
 </body>
+</x-app-layout>

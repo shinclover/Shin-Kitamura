@@ -1,27 +1,20 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\PostController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\UsersController;
+
+
+
+
 Route::get('/', [PostController::class, 'index']);
-Route::get('/posts/create', [PostController::class, 'create']);
-Route::get('/posts/{post}', [PostController::class ,'show']);
-Route::post('/posts', [PostController::class, 'store']);
-Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
-Route::put('/posts/{post}', [PostController::class, 'update']);
-Route::delete('/posts/{post}', [PostController::class,'delete']);
-// '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
-
-
-
+Route::get('/recipes', [PostController::class, 'index'])->name('recipes.index');
+Route::resource('categories', CategoryController::class);
+Route::resource('recipes', RecipeController::class);
+Route::get('/serch',[UsersController::class, 'serch']);
+Route::get('/users', [UsersController::class, 'index']);
 
 

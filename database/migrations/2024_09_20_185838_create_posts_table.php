@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+        Schema::create('posts', function (Blueprint $table) {
+             $table->id();
+             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
              $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
+            /* $table->foreignId('cook_id')->constrained('cooks')->onDelete('cascade'); */
+             $table->string('title', 50);
+             $table->string('image_url')->nullable();
              $table->float('tyourizikan');
              $table->float('karori');
              $table->float('enbun');
@@ -23,17 +27,16 @@ return new class extends Migration
              $table->float('syokuensoutouryou');
              $table->float('tousitu');
              $table->string('tukurikata');
-        //'category_id' は 'categoriesテーブル' の 'id' を参照する外部キーです
-        
-    });
-  
-        
+             $table->timestamps();
+             $table->softDeletes();
+        });
     }
 
-     public function down(): void
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-           
-        });
+        Schema::dropIfExists('posts');
     }
 };

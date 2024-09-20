@@ -13,6 +13,11 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- 追加（！！コードは自身のものに書き換えてください！！） --}}
+<script src="https://kit.fontawesome.com/xxxxx.js" crossorigin="anonymous"></script>
+{{-- 追加 --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

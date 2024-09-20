@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <title>料理レシピ一覧</title>
-    <!-- フォント -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <!-- スタイルシート -->
+<x-app-layout>
     <style>
         body {
             font-family: 'Nunito', sans-serif;
@@ -32,8 +25,6 @@
             margin: 5px 0;
         }
     </style>
-</head>
-<body>
     <h1>料理レシピ一覧</h1>
 　　<div>
     　　<form action="" method="GET">
@@ -49,17 +40,13 @@
         @if (isset($posts) && $posts->count())
             @foreach ($posts as $post)
                 <div class="recipe-card">
-                    <h3>レシピ名: {{ $post->name }}</h3>
-                    <p>材料: {{ $post->ingredients }}</p>
-                    <p>手順: {{ $post->instructions }}</p>
-                    <p>作成日: {{ $post->created_at }}</p>
-                    <!-- その他のレシピ情報があればここに追加 -->
+                    <h3>レシピ名: {{ $post->title }}</h3>
+                    
+                <a href="/posts1/{{ $post->id }}">{{ $post->title }}</a>    <!-- その他のレシピ情報があればここに追加 -->
                 </div>
             @endforeach
         @else
             <p>表示するレシピがありません。</p>
         @endif
     </div>
-
-</body>
-</html>
+</x-app-layout>

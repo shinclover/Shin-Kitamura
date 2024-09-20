@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Recipe; 
 use App\Http\Requests\PostRequest;
+use Auth;
 
 
 
@@ -58,27 +59,16 @@ class PostController extends Controller
         $post->delete();
         return redirect('/');
     }
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像のバリデーション
-        ]);
-    
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-    
-        // 画像の保存
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-            $post->image = $imagePath;
-        }
-    
-        $post->save();
-    
-        return redirect()->route('posts.index')->with('success', '投稿が作成されました。');
+       
+        $input = $request['post'];
+        $input['user_id'] =Auth::id();
+        $post->fill($input)->save();
+        return redirect('/');
     }
-    
+      public function show1(Post $post)
+   {
+   return view('posts.show1')->with(['post' => $post]);
+   }
     }

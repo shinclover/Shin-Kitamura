@@ -14,7 +14,7 @@ class PostSeeder extends Seeder
     {
        DB::table('posts')->insert([
                 'title' => '命名の心得',
-                'body' => '命名はデータを基準に考える',
+                /*'cook_id'=>1,*/
                 'category_id'=> 1,
                 'user_id'=>1,                       
                 'tyourizikan'=>1,                     

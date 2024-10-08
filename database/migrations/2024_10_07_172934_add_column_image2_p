@@ -5,18 +5,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 
-return new class extends Migration
-{
+ class CreatePostsTable extends Migration
     /**
      * Run the migrations.
      */
+  
+{
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('comments', 200);
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade'); 
-            $table->foreignId('post_id')->references('id')->on('posts')->onDelete('cascade'); 
+            $table->string('title', 50);
+            $table->string('body', 200);
+            $table->string('image_url');  //追加
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        //
     }
 };

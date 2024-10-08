@@ -26,6 +26,7 @@ class PostSeeder extends Seeder
                 'syokuensoutouryou'=>1,                 
                 'tousitu'=>1,                           
                 'tukurikata'=>'焼く',   
+                'zairyou'=>'白米',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),  
         ]);

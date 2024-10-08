@@ -1,6 +1,8 @@
+
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+   
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -43,5 +45,10 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+        <div class="flex items-center">
+                <a href="{{ route('register') }}" class="btn btn-primary">
+                    新規登録
+                </a>
+            </div>
     </form>
 </x-guest-layout>

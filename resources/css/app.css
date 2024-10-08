@@ -1,3 +1,4 @@
+@import "./style.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,7 +15,4 @@ a {
     @apply text-blue-600 underline;
 }
 /* 追加する */
-@import "./style.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+

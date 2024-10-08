@@ -27,6 +27,7 @@ return new class extends Migration
              $table->float('syokuensoutouryou');
              $table->float('tousitu');
              $table->string('tukurikata');
+             $table->string('zairyou');
              $table->timestamps();
              $table->softDeletes();
         });

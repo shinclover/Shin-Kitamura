@@ -14,19 +14,19 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         {{-- 追加（！！コードは自身のものに書き換えてください！！） --}}
-<script src="https://kit.fontawesome.com/xxxxx.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1f62fb1d36.js" crossorigin="anonymous"></script>
 {{-- 追加 --}}
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div>
             @include('layouts.navigation')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <header>
+                    <div>
                         {{ $header }}
                     </div>
                 </header>

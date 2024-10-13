@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comment; // モデルのパスに応じて調整
+use App\Models\Comment; 
+use App\Models\Post;// モデルのパスに応じて調整
 
 
 class CommentController extends Controller
@@ -17,7 +18,7 @@ class CommentController extends Controller
 
     Comment::create([
         'post_id' => $request->post_id,
-        'user_id' => auth()->id(),
+        'user_id' => auth()->user()->id,
         'comments' => $request->comments,
     ]);
 

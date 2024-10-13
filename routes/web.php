@@ -13,12 +13,12 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\CommentController;
 
 
-Route::get('/', function () {
-        return view('welcome');
+//Route::get('/', function () {
+        //return view('welcome');
     
-    Route::get('/register', [RegisteredController::class, 'showRegistrationForm'])->name('register');
+    //Route::get('/register', [RegisteredController::class, 'showRegistrationForm'])->name('register');
     
-});
+//});
     
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,7 +32,12 @@ Route::resource('categories', CategoryController::class);
 Route::resource('recipes', RecipeController::class);
 Route::get('/serch',[UsersController::class, 'serch']);
 Route::get('/users', [UsersController::class, 'index']);
+Route::controller(CommentController::class)->middleware(['auth'])->group(function(){});
 Route::post('/post/like', [LikeController::class, 'likePost']);
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+
 
 
 //Route::post('/like',function(){
@@ -44,12 +49,13 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/', 'index')->name('index');
     Route::post('/posts', [PostController::class, 'store'])->name('store');
     Route::get('/posts/create', [PostController::class, 'create'])->name('create');
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('show');
+    //Route::get('/posts/{post}', [PostController::class, 'show'])->name('show');
     Route::get('/posts1/{post}', 'show1')->name('show1');
     Route::put('/posts/{post}', 'update')->name('update');
     Route::delete('/posts/{post}', 'delete')->name('delete');
     Route::get('/posts/{post}/edit', 'edit')->name('edit');
-    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::get('/posts/{post}', [PostController::class, 'show1'])->name('posts.show1');
+
    // Route::get('/posts/create', [PostController::class, 'create'])->name('posts.show1');
     //Route::post('/posts', [PostController::class, 'store']);  //画像を含めた投稿の保存処理
     //Route::get('/posts/{post}', [PostController::class, 'show']); //投稿詳細画面の表示

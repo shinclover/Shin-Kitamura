@@ -49,7 +49,38 @@
             flex-wrap: wrap; /* 行が足りなくなった場合に折り返す */
             gap: 10px; /* 要素間の間隔 */
         }
-
+    .container {
+            display: flex; /* フレックスボックスを使用 */
+            justify-content: flex-end; /* 右端に揃える */
+            align-items: center; /* 縦方向の中央に揃える */
+            height: 10vh; /* コンテナの高さを100vhに設定（必要に応じて調整） */
+        }
+        .content {
+            flex: 1; /* 左側のコンテンツは残りのスペースを占める */
+            margin-right: 20px; /* コメントセクションとの間にスペースを追加 */
+        }
+        .comments-section {
+            width: 300px; /* コメントセクションの幅を指定 */
+            padding: 10px; /* 内側のパディング */
+            border: 1px solid #ddd; /* 枠線を追加 */
+            border-radius: 5px; /* 角を丸くする */
+            background-color: #f9f9f9; /* 背景色を設定 */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        strong {
+            color: #333;
+        }
+        small {
+            color: #999;
+        }
     </style>
 </head>
 <x-app-layout>
@@ -58,7 +89,6 @@
         <h1 class="title">
             {{ $post->title }}
         </h1>
-        <form action="/posts" method="POST" enctype="multipart/form-data">
         <div class="content">
     <div class="post-details">
         <a href="/categories/{{ $post->category->id }}" class='no-underline text-black'>{{ $post->category->name }}</a>
@@ -93,7 +123,7 @@
 
         </div> 
         <div>
-        <img src="{{ $post->image_url }}" alt="画像が読み込めません。">
+<img src="{{ $post->image_url }}" alt="画像が読み込めません。" style="width: 300px; height: auto;">
         </div>
 
         <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
@@ -120,7 +150,34 @@
         @guest
             <p>loginしていません</p>
         @endguest
-        
+               <h2>コメント</h2>
+        <form action="/comments" method="POST">
+            @csrf
+            <input type="hidden" name="post_id" value="{{ $post->id }}">
+            <textarea name="comments" required style="width: 100%; height: 150px;"></textarea>
+            <button type="submit">コメントする</button>
+        </form>
+      <div class="container">
+    <div class="content">
+        <!-- 他のコンテンツ -->
+    </div>
+    <div class="comments-section">
+        <h3>コメント</h3>
+        @if ($comments->count())
+            <ul>
+                @foreach ($comments as $comment)
+                    <li>
+                        <strong>{{ $comment->user->name }}:</strong>
+                        <p>{{ $comment->comments }}</p>
+                        <small>{{ $comment->created_at->format('Y/m/d H:i') }}</small>
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <p>コメントはまだありません。</p>
+        @endif
+    </div>
+</div>
         <script>
            // import Chart from 'chart.js/auto';
            
@@ -175,25 +232,5 @@
             });
            
         </script>
-       <h2>コメント</h2>
-        <form method="POST" action="{{ route('comments.store') }}">
-            @csrf
-            <input type="hidden" name="post_id" value="{{ $post->id }}">
-            <textarea name="comments" required style="width: 100%; height: 150px;"></textarea>
-            <button type="submit">コメントする</button>
-        </form>
-<h3>コメント</h3>
-@if ($comments->count())
-    <ul>
-        @foreach ($comments as $comment)
-            <li>
-                <strong>{{ $comment->user->name }}:</strong> {{ $comment->comments }}
-            </li>
-        @endforeach
-    </ul>
-@else
-    <p>コメントはまだありません。</p>
-@endif
-
     </body>
 </x-app-layout>

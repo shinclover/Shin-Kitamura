@@ -56,7 +56,7 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
-        dd($input_post);
+        //dd($input_post);
         $post->fill($input_post)->save();
         return redirect('/posts/' . $post->id);
     }
@@ -73,7 +73,9 @@ class PostController extends Controller
         $input += ['image_url' => $image_url]; 
         $input['user_id'] =Auth::id();
         $post->fill($input)->save();
-        return redirect('/posts/' . $post->id);
+        return redirect('/posts1/' . $post->id);
+        
+    
         
         
        
@@ -83,7 +85,7 @@ class PostController extends Controller
        // 投稿とそのコメントを取得
 $comments = Comment::where('post_id',$post->id)->get();
    return view('posts.show1')->with(['post' => $post,'comments'=>$comments]);
-   return view('/posts/show1')->with(['post' => $post]);
+   //return view('/posts/show1')->with(['post' => $post]);
     //return view('/posts/show1');  //create.blade.phpを表示
    }
    
@@ -92,4 +94,6 @@ $comments = Comment::where('post_id',$post->id)->get();
    return view('posts.show')->with(['post' => $post]);
    }
    
+   
     }
+    

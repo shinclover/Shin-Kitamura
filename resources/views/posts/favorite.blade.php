@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -74,16 +74,10 @@
     
     </style>
     <x-app-layout>
-    <h1>料理レシピ一覧</h1>
-　　<div>
-    　　<form action="" method="GET">
-        <input type="text" name="keyword" value="" placeholder="検索キーワードを入力">
-        <input type="submit" value="検索">
-        <input type="reset" value="クリア">
-        </form>
-       </div>
+    <h1>お気に入り一覧</h1>
+　
 <!-- Test Variable Display -->
-    <p>Test Value: {{ $test ?? 'Default value' }}</p>
+    
 
     <!-- Display Recipe's Details in 3 columns -->
     <div class="container">

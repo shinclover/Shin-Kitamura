@@ -14,24 +14,16 @@ use Cloudinary;
 
 
 
-
 class PostController extends Controller
    {
     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
+        $posts = Post::where('title', 'LIKE', "%{$keyword}%") 
+        ->orWhereHas('category', function ($query) use ($keyword) { $query->where('name', 'LIKE', "%{$keyword}%"); }) 
+        ->limit(20) ->get();
 
-        $query = Post::query();
-
-        if(!empty($keyword)) {
-            $query->where('title', 'LIKE', "%{$keyword}%");
-        }
-
-        $posts = $query->latest()->limit(20)->get();
-
-      
-        // 最新の20件の料理レシピを取得
-
+       
         return view('posts.index', compact('keyword'))->with([
             'test' => 'string',
             'posts' => $posts,  // レシピデータをビューに渡す
@@ -67,19 +59,16 @@ class PostController extends Controller
     }
     public function store(PostRequest $request, Post $post)
     {
-        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
-        //dd($image_url); 
         $input = $request['post'];
-        $input += ['image_url' => $image_url]; 
+        if($request->file('image')){ //画像ファイルが送られた時だけ処理が実行される
+        $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $input += ['image_url' => $image_url];
+        }
         $input['user_id'] =Auth::id();
         $post->fill($input)->save();
         return redirect('/posts1/' . $post->id);
-        
-    
-        
-        
-       
-    }
+         }
+         
       public function show1(Post $post)
    {
        // 投稿とそのコメントを取得
@@ -89,11 +78,22 @@ $comments = Comment::where('post_id',$post->id)->get();
     //return view('/posts/show1');  //create.blade.phpを表示
    }
    
-    public function show(Post $post)
-   {
-   return view('posts.show')->with(['post' => $post]);
-   }
-   
-   
+   public function show(Post $post)
+{
+    // Postに関連する画像を取得
+    $images = $post->images; // ここでPostモデルにimagesリレーションを定義していると仮定
+
+    return view('posts.show')->with([
+        'post' => $post,
+        //'images' => $images, // 画像情報も渡す
+    ]);
+}
+   public function favorite()
+    {
+        $user_id = \Auth::id();
+        //dd(Post::)
+        $dates=User::find($user_id)->favorites()->get();
+        return view('posts.favorite')->with(['posts' => $dates]);  
     }
+  }
     

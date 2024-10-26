@@ -49,7 +49,7 @@
             flex-wrap: wrap; /* 行が足りなくなった場合に折り返す */
             gap: 10px; /* 要素間の間隔 */
         }
-    .container {
+    　　.container {
             display: flex; /* フレックスボックスを使用 */
             justify-content: flex-end; /* 右端に揃える */
             align-items: center; /* 縦方向の中央に揃える */
@@ -64,8 +64,12 @@
             padding: 10px; /* 内側のパディング */
             border: 1px solid #ddd; /* 枠線を追加 */
             border-radius: 5px; /* 角を丸くする */
-            background-color: #f9f9f9; /* 背景色を設定 */
+            background-color: #CCFFFF; /* 背景色を設定 */
         }
+         .image-size {
+        width: 500px; /* 幅を300pxに設定 */
+        height: auto; /* 高さは自動調整 */
+    　　}
         ul {
             list-style-type: none;
             padding: 0;
@@ -81,6 +85,7 @@
         small {
             color: #999;
         }
+       
     </style>
 </head>
 <x-app-layout>
@@ -122,9 +127,11 @@
 </div>
 
         </div> 
+        @if($post->image_url)
         <div>
-<img src="{{ $post->image_url }}" alt="画像が読み込めません。" style="width: 300px; height: auto;">
+            <img src="{{ $post->image_url }}" alt="画像が読み込めません。"class="image-size">
         </div>
+        @endif
 
         <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
         <div class="footer">
@@ -198,11 +205,13 @@
                         {{ $post->tousitu }}
                     ],
                     backgroundColor: [
-                        '#ff0000',
-                        '#0000ff',
+                        '#00FFFF',
+                        '#FFFF88',
+                        '#FF9900',
                         '#ffff00',
                         '#008000',
-                        '#ffa500',
+                        '#FF0000',
+                        
                     ]
                 }]
             },
@@ -230,6 +239,9 @@
                 })
                 .catch(() => alert('処理が失敗しました。画面を再読み込みし、通信環境の良い場所で再度お試しください。'))
             });
+         
+
+
            
         </script>
     </body>

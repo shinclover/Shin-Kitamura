@@ -1,7 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">Blog</x-slot>
+    <x-slot name="header"></x-slot>
      <style>
-        .form-container {background-color:#FEFCE8;
+        .form-container {background-color:#CCFFCC;
             display: flex;
             justify-content: center;
             align-items: center;

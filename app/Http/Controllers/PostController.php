@@ -11,7 +11,7 @@ use App\Http\Requests\PostRequest;
 use Auth;
 use App\Models\Comment; // モデルのパスに応じて調整
 use Cloudinary;
-
+use App\Models\Favorite;
 
 
 class PostController extends Controller

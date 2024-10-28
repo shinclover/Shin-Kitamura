@@ -28,19 +28,21 @@
         .container {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 20px; /* カード間のスペース */
         }
         .recipe-card {
-            flex: 1 1 calc(33.333% - 20px); /* 3列レイアウト */
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            padding: 15px;
-            border-radius: 8px;
-            background-color:#FEFAE0 ;
-            color:#000000;
-            min-width: 250px; /* カードの最小幅を設定 */
-            cursor: pointer;
-        }
+        flex: 1 1 calc(33.333% - 20px); /* 3列レイアウト */
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: #FEFAE0;
+        color: #000000;
+        min-width: 150px; /* カードの最小幅を設定 */
+        cursor: pointer;
+        margin-top: 10px; /* カードの上にスペースを追加 */
+    　　}
         .recipe-card:hover {
             transition-duration: 0.3s;
             background-color:#C75B7A;
@@ -67,11 +69,16 @@
         .count-num {
             font-size: 20px;
             margin-left: 10px;
+            margin-top: 10px;
         }
         .fa-star {
             font-size: 30px;
+            margin-top: 10px; 
         }
-    
+    　　h1 {
+        text-align: center; /* テキストを中央揃え */
+        margin-bottom: 20px; /* 下にスペースを追加（必要に応じて調整） */
+    　　　　}
     </style>
     <x-app-layout>
     <h1>お気に入り一覧</h1>
@@ -99,30 +106,14 @@
                    
                <p class='body'>{{ $post->body }}</p>
                    
-                </a> 
-                  <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" onclick="deletePost({{ $post->id }})">削除</button> 
-                </form>  <!-- その他のレシピ情報があれば  <!-- 以下を追記 -->
-                </div>  
-                
-               
-                <script>
-                    function deletePost(id) {
-                        'use strict'
-                
-                        if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
-                            document.getElementById(`form_${id}`).submit();
-                        }
-                    }
-                </script>
+                </a>  </div>  
+                 
                
 
    
   </head>
   <body>
-    <h1></h1> <!-- タイトルを追加 -->
+    <h2></h2> <!-- タイトルを追加 -->
     <div><p>{{ $post->content }}</p></div>
 
     @auth
@@ -168,6 +159,7 @@
                     const data = await res.json();
                     clickedEl.nextElementSibling.innerHTML = data.favoritesCount; // お気に入り数を更新
                 } catch (error) {
+                console.log(error);
                     alert('処理が失敗しました。画面を再読み込みし、通信環境の良い場所で再度お試しください。');
                 }
             });

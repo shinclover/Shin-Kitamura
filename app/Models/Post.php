@@ -92,9 +92,9 @@ public function likes()
         //     $favoritersArr[] = $postFavorite->user_id;
         // }
        if ($this->favorites) {
-        foreach ($this->favorites as $postFavorite) {
+        foreach ($this->favorites as $Favorite) {
             // お気に入りしたユーザーのidを配列に格納
-            $favoritersArr[] = $postFavorite->user_id;
+            $favoritersArr[] = $Favorite->user_id;
         }
     }
         // in_arrayメソッドで認証済ユーザーidが配列に存在するか判定

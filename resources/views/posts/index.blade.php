@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +28,7 @@
         .container {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 20px; /* カード間のスペース */
         }
         .recipe-card {
@@ -38,7 +39,7 @@
             border-radius: 8px;
             background-color:#FEFAE0 ;
             color:#000000;
-            min-width: 250px; /* カードの最小幅を設定 */
+            min-width: 150px; /* カードの最小幅を設定 */
             cursor: pointer;
         }
         .recipe-card:hover {
@@ -83,7 +84,7 @@
         </form>
        </div>
 <!-- Test Variable Display -->
-    <p>Test Value: {{ $test ?? 'Default value' }}</p>
+   
 
     <!-- Display Recipe's Details in 3 columns -->
     <div class="container">
@@ -174,6 +175,7 @@
                     const data = await res.json();
                     clickedEl.nextElementSibling.innerHTML = data.favoritesCount; // お気に入り数を更新
                 } catch (error) {
+                 console.log(error);
                     alert('処理が失敗しました。画面を再読み込みし、通信環境の良い場所で再度お試しください。');
                 }
             });

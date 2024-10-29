@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_path', 
     ];
 
     /**
@@ -49,6 +50,6 @@ class User extends Authenticatable
    }
    public function favorites()
     {
-       return $this->belongsToMany(Post::class, 'post_favorites');
+       return $this->belongsToMany(Post::class, 'favorites');
     }
     }

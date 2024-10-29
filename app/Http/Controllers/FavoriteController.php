@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PostFavorite;  // Favoriteモデルのインポート
+use App\Models\Favorite;  // Favoriteモデルのインポート
 use App\Models\Post;
 use App\Models\User;
 use Auth;
@@ -17,17 +17,17 @@ class FavoriteController extends Controller
         $post_id = $request->post_id;
 
         // 自身がお気に入り済みなのか判定
-        $alreadyFavorited = PostFavorite::where('user_id', $user_id)->where('post_id', $post_id)->first();
+        $alreadyFavorited = Favorite::where('user_id', $user_id)->where('post_id', $post_id)->first();
 
         if (!$alreadyFavorited) {
             // こちらはお気に入りをしていない場合の処理です。つまり、post_favoritesテーブルに自身のID（user_id）とお気に入りした記事のID（post_id）を保存します。
-            $favorite = new PostFavorite(); // PostLike から PostFavorite に変更
+            $favorite = new Favorite(); // PostLike から PostFavorite に変更
             $favorite->post_id = $post_id;
             $favorite->user_id = $user_id;
             $favorite->save();
         } else {
             // すでにお気に入りをしていた場合は、以下のように post_favorites テーブルからレコードを削除します。
-            PostFavorite::where('post_id', $post_id)->where('user_id', $user_id)->delete();
+            Favorite::where('post_id', $post_id)->where('user_id', $user_id)->delete();
         }
 
         // ビューにその記事のお気に入り数を渡すため、お気に入り数を計算します。

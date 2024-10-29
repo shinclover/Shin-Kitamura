@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header"></x-slot>
      <style>
-        .form-container {background-color:#CCFFCC;
+        .form-container {background-color:#F3FEB8;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200vh; /* ビューポートの高さを100%に */
+            height: 150vh; /* ビューポートの高さを100%に */
         }
         form {background-color:#FEFCE8;
             max-width: 600px; /* フォームの最大幅 */

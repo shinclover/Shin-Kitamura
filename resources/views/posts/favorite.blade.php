@@ -79,8 +79,25 @@
         text-align: center; /* テキストを中央揃え */
         margin-bottom: 20px; /* 下にスペースを追加（必要に応じて調整） */
     　　　　}
+    　　　　@media screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* 画像のサイズを変更 */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* ナビゲーションバーを縦並びに */
+    .navbar {
+        display: block;
+    }
+}
     </style>
     <x-app-layout>
+   @csrf 
     <h1>お気に入り一覧</h1>
 　
 <!-- Test Variable Display -->

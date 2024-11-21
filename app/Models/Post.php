@@ -111,6 +111,7 @@ public function images()
     }
   public static function getPostWithImage()  
   {
-      return self::pluck('image_url')->toArray();
+     return self::with('images')->get();
   }
+  
 }

@@ -27,7 +27,9 @@
                     <x-nav-link :href="route('favorite')" :active="request()->routeIs('favorite')">
                         {{ __('お気に入り') }}
                     </x-nav-link>
-                </div>
+                   
+
+                   </div>
 
                 
             </div>

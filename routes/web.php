@@ -22,7 +22,7 @@ use App\Http\Controllers\GalleryController;
 //});
     
 Route::get('/dashboard', [GalleryController::class, 'gallery'])->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/post/show1/{post}', [PostController::class, 'show1'])->name('post.show1');
 
 
 Route::get('/', [PostController::class, 'index']);

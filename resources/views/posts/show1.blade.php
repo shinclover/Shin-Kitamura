@@ -85,7 +85,22 @@
         small {
             color: #999;
         }
-       
+       @media screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* 画像のサイズを変更 */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* ナビゲーションバーを縦並びに */
+    .navbar {
+        display: block;
+    }
+}
     </style>
 </head>
 <x-app-layout>

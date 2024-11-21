@@ -1,11 +1,11 @@
 <nav x-data="{ open: false }">
     <!-- Primary Navigation Menu -->
      <style>
-        body {background-color:#CCFFCC;
+        body {background-color:#F3FEB8;
     </style>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+       <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -24,10 +24,13 @@
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
                         {{ __('作成') }}
                     </x-nav-link>
-               　　　<x-nav-link :href="route('favorite')" :active="request()->routeIs('favorite')">
-    　　　　　　　　　　　　　　　　{{ __('お気に入り') }}
+                    <x-nav-link :href="route('favorite')" :active="request()->routeIs('favorite')">
+                        {{ __('お気に入り') }}
                     </x-nav-link>
-                </div>
+                   
+
+                   </div>
+
                 
             </div>
 

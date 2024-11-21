@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\GalleryController;
 
 //Route::get('/', function () {
         //return view('welcome');
@@ -20,10 +21,8 @@ use App\Http\Controllers\FavoriteController;
     
 //});
     
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::get('/dashboard', [GalleryController::class, 'gallery'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/post/show1/{post}', [PostController::class, 'show1'])->name('post.show1');
 
 
 Route::get('/', [PostController::class, 'index']);
@@ -86,4 +85,3 @@ Route::middleware('auth')->group(function () {
 
 
 require __DIR__.'/auth.php';
-

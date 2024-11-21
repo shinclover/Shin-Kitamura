@@ -11,6 +11,7 @@
     <x-slot name="header">
         </x-slot>
     <body>
+        @csrf 
         <h1 class="title">
             {{ $post->title }}
             <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>

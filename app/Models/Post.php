@@ -72,7 +72,7 @@ public function likes()
     }
     public function favorites()
     {
-        return $this->hasMany(PostFavorite::class); 
+        return $this->hasMany(Favorite::class); 
         //return $this->belongsToMany(Users::class, 'favorites');// PostFavoriteに変更
     }
 
@@ -86,11 +86,17 @@ public function likes()
         $favoritersArr = [];
 
         // $thisはPostクラスのインスタンスを指す
-        foreach ($this->favorites as $postFavorite) {
+        //dd($favoritersArr);
+        // foreach ($this->favorites as $postFavorite) {
+        //     // お気に入りしたユーザーのidを配列に格納
+        //     $favoritersArr[] = $postFavorite->user_id;
+        // }
+       if ($this->favorites) {
+        foreach ($this->favorites as $Favorite) {
             // お気に入りしたユーザーのidを配列に格納
-            $favoritersArr[] = $postFavorite->user_id;
+            $favoritersArr[] = $Favorite->user_id;
         }
-
+    }
         // in_arrayメソッドで認証済ユーザーidが配列に存在するか判定
         return in_array($authUserId, $favoritersArr);
     }
@@ -103,5 +109,9 @@ public function images()
     {
         return $this->hasMany(Image::class); // Imageモデルと関連付け
     }
-    
+  public static function getPostWithImage()  
+  {
+     return self::with('images')->get();
+  }
+  
 }

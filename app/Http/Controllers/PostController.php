@@ -8,9 +8,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Recipe; 
 use App\Http\Requests\PostRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Comment; // モデルのパスに応じて調整
 use Cloudinary;
+use App\Models\Favorite;
 
 
 
@@ -74,6 +75,7 @@ class PostController extends Controller
        // 投稿とそのコメントを取得
 $comments = Comment::where('post_id',$post->id)->get();
    return view('posts.show1')->with(['post' => $post,'comments'=>$comments]);
+   return view('show1', compact('post'));
    //return view('/posts/show1')->with(['post' => $post]);
     //return view('/posts/show1');  //create.blade.phpを表示
    }
@@ -95,5 +97,11 @@ $comments = Comment::where('post_id',$post->id)->get();
         $dates=User::find($user_id)->favorites()->get();
         return view('posts.favorite')->with(['posts' => $dates]);  
     }
+   public function myPosts()
+    {
+        $posts = Auth::user()->posts; // 現在のユーザーの投稿を取得
+        return view('posts.my-posts', compact('posts'));
+    }
+
   }
     
